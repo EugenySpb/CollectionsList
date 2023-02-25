@@ -48,7 +48,7 @@ public class Main {
                         System.out.println((i + 1) + ". " + shoppingList.get(i));
                     }
                     System.out.println("Какую хотите удалить? Введите номер или название");
-                    scanner.nextLine(); // съедаем лишний перевод строки
+                    scanner.nextLine();
                     String input = scanner.nextLine();
                     try {
                         int index = Integer.parseInt(input);
