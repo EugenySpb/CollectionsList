@@ -29,64 +29,80 @@ public class Main {
             }
             switch (choice) {
                 case 1:
-                    System.out.println("Какую покупку хотите добавить?");
-                    scanner.nextLine();
-                    String item = scanner.nextLine();
-                    shoppingList.add(item); // добавляем новый элемент в список
-                    System.out.println("Итого в списке покупок: " + shoppingList.size());
+                    addProduct(shoppingList, scanner);
                     break;
                 case 2:
-                    System.out.println("Список покупок:");
-                    for (int i = 0; i < shoppingList.size(); i++) {
-                        System.out.println((i + 1) + ". " + shoppingList.get(i));
-                    }
-                    Thread.sleep(1000);
+                    showProduct(shoppingList);
                     break;
                 case 3:
-                    System.out.println("Список покупок:");
-                    for (int i = 0; i < shoppingList.size(); i++) {
-                        System.out.println((i + 1) + ". " + shoppingList.get(i));
-                    }
-                    System.out.println("Какую хотите удалить? Введите номер или название");
-                    scanner.nextLine();
-                    String input = scanner.nextLine();
-                    try {
-                        int index = Integer.parseInt(input);
-                        shoppingList.remove(index - 1); // удаляем по номеру
-                        System.out.println("Покупка \"" + input + "\" удалена, список покупок:");
-                    } catch (NumberFormatException e) {
-                        if (shoppingList.remove(input)) { // удаляем по названию
-                            System.out.println("Покупка \"" + input + "\" удалена, список покупок:");
-                        } else {
-                            System.out.println("Покупка \"" + input + "\" не найдена в списке покупок");
-                        }
-                    }
-                    for (int i = 0; i < shoppingList.size(); i++) {
-                        System.out.println((i + 1) + ". " + shoppingList.get(i));
-                    }
-                    Thread.sleep(1000);
+                    removeProduct(shoppingList, scanner);
                     break;
                 case 4:
-                    System.out.println("Введите текст для поиска:");
-                    scanner.nextLine();
-                    String query = scanner.nextLine().toLowerCase();
-                    boolean foundQuery = false;
-                    System.out.println("Найдено:");
-                    for (int i = 0; i < shoppingList.size(); i++) {
-                        String itemLower = shoppingList.get(i).toLowerCase();
-                        if (itemLower.contains(query)) {
-                            System.out.println((i + 1) + ". " + shoppingList.get(i));
-                            foundQuery = true;
-                        }
-                    }
-                    if (!foundQuery) {
-                        System.out.println("Ничего не найдено.");
-                    }
-                    Thread.sleep(1000);
+                    searchProduct(shoppingList, scanner);
                     break;
                 default:
                     System.out.println("Неверный выбор");
             }
         }
+    }
+
+    private static void addProduct(List<String> shoppingList, Scanner scanner) {
+        System.out.println("Какую покупку хотите добавить?");
+        scanner.nextLine();
+        String item = scanner.nextLine();
+        shoppingList.add(item); // добавляем новый элемент в список
+        System.out.println("Итого в списке покупок: " + shoppingList.size());
+    }
+
+    private static void showProduct(List<String> shoppingList) throws InterruptedException {
+        System.out.println("Список покупок:");
+        for (int i = 0; i < shoppingList.size(); i++) {
+            System.out.println((i + 1) + ". " + shoppingList.get(i));
+        }
+        Thread.sleep(1000);
+    }
+
+    private static void removeProduct(List<String> shoppingList, Scanner scanner) throws InterruptedException {
+        System.out.println("Список покупок:");
+        for (int i = 0; i < shoppingList.size(); i++) {
+            System.out.println((i + 1) + ". " + shoppingList.get(i));
+        }
+        System.out.println("Какую хотите удалить? Введите номер или название");
+        scanner.nextLine();
+        String input = scanner.nextLine();
+        try {
+            int index = Integer.parseInt(input);
+            shoppingList.remove(index - 1); // удаляем по номеру
+            System.out.println("Покупка \"" + input + "\" удалена, список покупок:");
+        } catch (NumberFormatException e) {
+            if (shoppingList.remove(input)) { // удаляем по названию
+                System.out.println("Покупка \"" + input + "\" удалена, список покупок:");
+            } else {
+                System.out.println("Покупка \"" + input + "\" не найдена в списке покупок");
+            }
+        }
+        for (int i = 0; i < shoppingList.size(); i++) {
+            System.out.println((i + 1) + ". " + shoppingList.get(i));
+        }
+        Thread.sleep(1000);
+    }
+
+    private static void searchProduct(List<String> shoppingList, Scanner scanner) throws InterruptedException {
+        System.out.println("Введите текст для поиска:");
+        scanner.nextLine();
+        String query = scanner.nextLine().toLowerCase();
+        boolean foundQuery = false;
+        System.out.println("Найдено:");
+        for (int i = 0; i < shoppingList.size(); i++) {
+            String itemLower = shoppingList.get(i).toLowerCase();
+            if (itemLower.contains(query)) {
+                System.out.println((i + 1) + ". " + shoppingList.get(i));
+                foundQuery = true;
+            }
+        }
+        if (!foundQuery) {
+            System.out.println("Ничего не найдено.");
+        }
+        Thread.sleep(1000);
     }
 }
